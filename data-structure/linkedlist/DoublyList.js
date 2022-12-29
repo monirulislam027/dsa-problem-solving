@@ -6,19 +6,18 @@ class Node {
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     const node = new Node(value);
     this.head = node;
     this.tail = node;
-    this.length = 1;
   }
 
   append(value) {
     const node = new Node(value);
+    node.prev = this.tail;
     this.tail.next = node;
     this.tail = node;
-    this.length++;
   }
 
   prepend(value) {
@@ -48,20 +47,22 @@ class LinkedList {
     }
 
     let find = this.findAt(position - 1);
-    const newNode = new Node(value, find.next);
+    const newNode = new Node(value, find.next, find);
+    newNode.next.prev = newNode;
     find.next = newNode;
-    this.length++;
   }
 
   removeAt(position) {
-    if (position > this.length && 0 <= 0) return;
+    if (position > this.length && position <= 0) return;
     if (position === 1) {
       this.head = this.head.next;
+      this.head.prev = null;
       this.length--;
       return;
     }
     const find = this.findAt(position - 1);
     find.next = find.next.next;
+    find.next.prev = find;
     this.length--;
   }
 

@@ -1,8 +1,7 @@
 class Node {
-  constructor(value, next = null, prev = null) {
+  constructor(value, next = null) {
     this.value = value;
     this.next = next;
-    this.prev = prev;
   }
 }
 
@@ -15,7 +14,7 @@ class LinkedList {
   }
 
   append(value) {
-    const node = new Node(value);
+    const node = new Node(value, this.head);
     this.tail.next = node;
     this.tail = node;
     this.length++;
@@ -24,6 +23,7 @@ class LinkedList {
   prepend(value) {
     const node = new Node(value, this.head);
     this.head = node;
+    this.tail.next = this.head;
     this.length++;
   }
 
@@ -57,6 +57,7 @@ class LinkedList {
     if (position > this.length && 0 <= 0) return;
     if (position === 1) {
       this.head = this.head.next;
+      this.tail.next = this.head;
       this.length--;
       return;
     }
@@ -82,12 +83,22 @@ const list = new LinkedList(20);
 
 list.prepend(10);
 list.append(30);
+list.append(40);
 list.append(50);
-list.insertAt(4, 40);
-list.insertAt(4, 30);
+list.append(60);
 
-list.updateAt(3, 25);
+// list.print();
 
-list.removeAt(3);
+const isCircular = (head) => {
+  let data1 = head;
+  let data2 = head.next.next;
+  while (data1 && data2) {
+    if (data1.value === data2.value) return true;
+    data1 = data1.next;
+    data2 = data2?.next?.next;
+  }
 
-list.print();
+  return false;
+};
+
+console.log(isCircular(list.head));
