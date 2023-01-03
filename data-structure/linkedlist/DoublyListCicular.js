@@ -1,30 +1,31 @@
 class Node {
-  constructor(value, next = null) {
+  constructor(value, next = null, prev = null) {
     this.value = value;
     this.next = next;
+    this.prev = prev;
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     const node = new Node(value);
     this.head = node;
     this.tail = node;
-    this.length = 1;
   }
 
   append(value) {
     const node = new Node(value);
+    node.prev = this.tail;
     node.next = this.head;
     this.tail.next = node;
     this.tail = node;
-    this.length++;
   }
 
   prepend(value) {
     const node = new Node(value, this.head);
+    node.prev = this.tail;
+    this.tail.next = node;
     this.head = node;
-    this.tail.next = this.head;
     this.length++;
   }
 
@@ -49,21 +50,22 @@ class LinkedList {
     }
 
     let find = this.findAt(position - 1);
-    const newNode = new Node(value, find.next);
+    const newNode = new Node(value, find.next, find);
+    newNode.next.prev = newNode;
     find.next = newNode;
-    this.length++;
   }
 
   removeAt(position) {
-    if (position > this.length && 0 <= 0) return;
+    if (position > this.length && position <= 0) return;
     if (position === 1) {
       this.head = this.head.next;
-      this.tail.next = this.head;
+      this.head.prev = null;
       this.length--;
       return;
     }
     const find = this.findAt(position - 1);
     find.next = find.next.next;
+    find.next.prev = find;
     this.length--;
   }
 
@@ -84,22 +86,12 @@ const list = new LinkedList(20);
 
 list.prepend(10);
 list.append(30);
-list.append(40);
 list.append(50);
-list.append(60);
+list.insertAt(4, 40);
+list.insertAt(4, 30);
 
-// list.print();
+list.updateAt(3, 25);
 
-const isCircular = (head) => {
-  let data1 = head;
-  let data2 = head.next.next;
-  while (data1 && data2) {
-    if (data1.value === data2.value) return true;
-    data1 = data1.next;
-    data2 = data2?.next?.next;
-  }
+list.removeAt(3);
 
-  return false;
-};
-
-console.log(isCircular(list.head));
+list.print();
