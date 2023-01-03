@@ -14,7 +14,7 @@ function selection_sort(data, n) {
   return data;
 }
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 22, 30, 50, 52];
+const data = [1, 2, 3, 11, 12, 14, 22, 30, 50, 52];
 
 const d = selection_sort(data, data.length);
 
