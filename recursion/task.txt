@@ -1,0 +1,7 @@
+1. array traverse
+2. sum 
+3. arr reverse
+4. palindrome
+5. linear search
+6. Binary Search
+7. LinkedList Traverse
