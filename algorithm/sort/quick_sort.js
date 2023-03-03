@@ -21,7 +21,7 @@ function partitions(arr, left, right) {
   let i = left;
   let j = right;
 
-  while (i < count && j > count) {
+  while (i < count || j > count) {
     if (arr[i] > pivot && arr[j] < pivot) {
       [arr[i], arr[j]] = [arr[j], arr[i]];
       i++;
@@ -39,5 +39,3 @@ function partitions(arr, left, right) {
 const arr = [9, 2, 5, 18, 38, 20, 45, 71, 6, 4];
 quickSort(arr, 0, arr.length - 1);
 console.log(arr);
-
-const a = [1, 4, 5, 6, 10, 30, 20];
