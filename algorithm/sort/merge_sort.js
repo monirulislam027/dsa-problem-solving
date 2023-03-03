@@ -14,13 +14,8 @@ function mergeSubArrays(arr, left, mid, right) {
   let j = mid + 1;
   let k = i;
   while (i <= mid && j <= right) {
-    if (arr[i] < arr[j]) {
-      tempArray[k] = arr[i];
-      i++;
-    } else {
-      tempArray[k] = arr[j];
-      j++;
-    }
+    tempArray[k] = arr[arr[i] < arr[j] ? i : j];
+    arr[i] < arr[j] ? i++ : j++;
     k++;
   }
 
