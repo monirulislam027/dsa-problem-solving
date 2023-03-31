@@ -3,7 +3,6 @@
  * @return {number[]}
  */
 
-// rome-ignore lint/style/noVar: <explanation>
 var smallerNumbersThanCurrent = function (nums) {
 	const arr = [];
 	for (let i = 0; i < nums.length; i++) {
