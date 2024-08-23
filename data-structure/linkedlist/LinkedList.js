@@ -77,17 +77,47 @@ class LinkedList {
     }
   }
 }
+const l1 = [2, 4, 3],
+  l2 = [5, 6, 4];
+const list1 = new LinkedList(2);
+list1.append(4);
+list1.append(3);
+const list2 = new LinkedList(5);
+list2.append(6);
+list2.append(4);
 
-const list = new LinkedList(20);
+var addTwoNumbers = function (l1, l2) {
+  let lNumber1 = "";
+  let current1 = l1.head;
+  while (current1) {
+    lNumber1 = current1.value.toString() + lNumber1;
+    current1 = current1.next;
+  }
+  lNumber1 = parseInt(lNumber1);
+  let lNumber2 = "";
 
-list.prepend(10);
-list.append(30);
-list.append(50);
-list.insertAt(4, 40);
-list.insertAt(4, 30);
+  current1 = l2.head;
+  while (current1) {
+    lNumber2 = current1.value.toString() + lNumber2;
+    current1 = current1.next;
+  }
+  lNumber2 = parseInt(lNumber2);
 
-list.updateAt(3, 25);
+  let sum = (lNumber1 + lNumber2).toString();
+  let current = l1.head;
+  let i = 0;
+  while (i < sum.length) {
+    if (!current.next) {
+      current.next = {
+        value: null,
+        next: null,
+      };
+    }
+    current.value = parseInt(sum[i]);
+    current = current.next;
+    i++;
+  }
+  return l1;
+};
 
-list.removeAt(3);
-
-list.print();
+console.log(addTwoNumbers(list1, list2));

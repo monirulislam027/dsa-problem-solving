@@ -1,4 +1,3 @@
-const tempArray = [];
 function mergeSort(arr, left, right) {
   if (left < right) {
     const mid = Math.floor((left + right) / 2);
@@ -10,6 +9,7 @@ function mergeSort(arr, left, right) {
 }
 
 function mergeSubArrays(arr, left, mid, right) {
+  const tempArray = [];
   let i = left;
   let j = mid + 1;
   let k = i;
